@@ -10,10 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as RefundsRouteImport } from './routes/refunds'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as EPrescriptionRouteImport } from './routes/e-prescription'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
@@ -21,6 +25,16 @@ import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundsRoute = RefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -43,6 +57,16 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -62,20 +86,28 @@ const ProductSlugRoute = ProductSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/e-prescription': typeof EPrescriptionRoute
   '/faqs': typeof FaqsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
+  '/refunds': typeof RefundsRoute
   '/shop': typeof ShopRoute
   '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/e-prescription': typeof EPrescriptionRoute
   '/faqs': typeof FaqsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
+  '/refunds': typeof RefundsRoute
   '/shop': typeof ShopRoute
   '/product/$slug': typeof ProductSlugRoute
 }
@@ -83,10 +115,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/cart': typeof CartRoute
   '/contact': typeof ContactRoute
   '/e-prescription': typeof EPrescriptionRoute
   '/faqs': typeof FaqsRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/privacy': typeof PrivacyRoute
+  '/refunds': typeof RefundsRoute
   '/shop': typeof ShopRoute
   '/product/$slug': typeof ProductSlugRoute
 }
@@ -95,30 +131,42 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/account'
+    | '/cart'
     | '/contact'
     | '/e-prescription'
     | '/faqs'
     | '/how-it-works'
+    | '/privacy'
+    | '/refunds'
     | '/shop'
     | '/product/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/account'
+    | '/cart'
     | '/contact'
     | '/e-prescription'
     | '/faqs'
     | '/how-it-works'
+    | '/privacy'
+    | '/refunds'
     | '/shop'
     | '/product/$slug'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/account'
+    | '/cart'
     | '/contact'
     | '/e-prescription'
     | '/faqs'
     | '/how-it-works'
+    | '/privacy'
+    | '/refunds'
     | '/shop'
     | '/product/$slug'
   fileRoutesById: FileRoutesById
@@ -126,10 +174,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AccountRoute: typeof AccountRoute
+  CartRoute: typeof CartRoute
   ContactRoute: typeof ContactRoute
   EPrescriptionRoute: typeof EPrescriptionRoute
   FaqsRoute: typeof FaqsRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  PrivacyRoute: typeof PrivacyRoute
+  RefundsRoute: typeof RefundsRoute
   ShopRoute: typeof ShopRoute
   ProductSlugRoute: typeof ProductSlugRoute
 }
@@ -141,6 +193,20 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refunds': {
+      id: '/refunds'
+      path: '/refunds'
+      fullPath: '/refunds'
+      preLoaderRoute: typeof RefundsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-it-works': {
@@ -171,6 +237,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -198,10 +278,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AccountRoute: AccountRoute,
+  CartRoute: CartRoute,
   ContactRoute: ContactRoute,
   EPrescriptionRoute: EPrescriptionRoute,
   FaqsRoute: FaqsRoute,
   HowItWorksRoute: HowItWorksRoute,
+  PrivacyRoute: PrivacyRoute,
+  RefundsRoute: RefundsRoute,
   ShopRoute: ShopRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
