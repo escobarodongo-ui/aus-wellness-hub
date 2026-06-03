@@ -81,9 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Sydney-based clinical apothecary offering doctor-approved access to medical cannabis flower, vapes, oils and edibles for Australian patients." },
       { name: "author", content: "Cannabinoid Clinical" },
       { property: "og:title", content: "Cannabinoid Clinical — Sydney Medical Cannabis Apothecary" },
-      { property: "og:description", content: "Doctor-approved medical cannabis for Australian patients." },
+      { property: "og:description", content: "Sydney-based clinical apothecary offering doctor-approved access to medical cannabis flower, vapes, oils and edibles for Australian patients." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Cannabinoid Clinical — Sydney Medical Cannabis Apothecary" },
+      { name: "twitter:description", content: "Sydney-based clinical apothecary offering doctor-approved access to medical cannabis flower, vapes, oils and edibles for Australian patients." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/1f090c0d-76f9-4283-9ad6-cdf117734a83" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/1f090c0d-76f9-4283-9ad6-cdf117734a83" },
     ],
     links: [
       {
