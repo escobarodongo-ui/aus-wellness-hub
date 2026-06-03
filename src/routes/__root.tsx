@@ -113,13 +113,21 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { Header } from "../components/site/Header";
+import { Footer } from "../components/site/Footer";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
     </QueryClientProvider>
   );
 }
