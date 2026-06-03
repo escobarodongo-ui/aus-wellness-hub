@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Cannabinoid Clinical — Sydney Medical Cannabis Apothecary" },
+      { name: "description", content: "Sydney-based clinical apothecary offering doctor-approved access to medical cannabis flower, vapes, oils and edibles for Australian patients." },
+      { name: "author", content: "Cannabinoid Clinical" },
+      { property: "og:title", content: "Cannabinoid Clinical — Sydney Medical Cannabis Apothecary" },
+      { property: "og:description", content: "Doctor-approved medical cannabis for Australian patients." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
@@ -113,13 +112,21 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { Header } from "../components/site/Header";
+import { Footer } from "../components/site/Footer";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
     </QueryClientProvider>
   );
 }
