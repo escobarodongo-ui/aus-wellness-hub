@@ -1,155 +1,191 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import hero from "@/assets/hero-botanical.jpg";
-import { categories, products } from "@/data/products";
+import {
+  categoryCount,
+  categoryImage,
+  featuredWheelchairs,
+  formatAud,
+  heroProduct,
+  homeCategories,
+  products,
+  WARRANTY_SUMMARY,
+  warrantyFor,
+} from "@/data/products";
 import { ProductCard } from "@/components/site/ProductCard";
-import { Leaf, ShieldCheck, Stethoscope, Truck } from "lucide-react";
+import { WHATSAPP_HREF, WHATSAPP_NUMBER } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cannabinoid Clinical — Sydney Medical Cannabis Apothecary" },
-      { name: "description", content: "Doctor-approved access to medical cannabis flower, vapes, oils and edibles for Australian patients. Based in Sydney." },
+      { title: "Comfort Mobility — Wheelchairs in Australia" },
+      {
+        name: "description",
+        content:
+          "Shop wheelchairs and mobility equipment in Australia. Prices in AUD, with warranty cover stated on every product.",
+      },
+    ],
+    links: [
+      {
+        rel: "preload",
+        as: "image",
+        href: heroProduct.image,
+        fetchPriority: "high",
+      },
     ],
   }),
   component: Home,
 });
 
 function Home() {
+  const heroWarranty = warrantyFor(heroProduct.category, heroProduct.condition);
+
   return (
     <>
-      {/* HERO */}
-      <section className="relative">
-        <div className="absolute inset-0">
-          <img src={hero} alt="" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/55 to-primary/20" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-4 py-32 md:py-44 text-primary-foreground">
-          <div className="max-w-2xl">
-            <div className="text-[11px] tracking-[0.4em] uppercase text-gold mb-6">Sydney · Clinical Apothecary</div>
-            <h1 className="font-display text-5xl md:text-7xl leading-[1.05] text-balance">
-              Plant medicine,<br />
-              <span className="italic text-gold">prescribed with care.</span>
-            </h1>
-            <p className="mt-6 text-lg opacity-90 max-w-xl leading-relaxed">
-              Australia&rsquo;s discreet, doctor-led pathway to lawful medical cannabis &mdash;
-              from initial consultation to apothecary-grade product delivered to your door.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link to="/e-prescription" className="btn-gold px-7 py-3.5 text-sm tracking-widest uppercase rounded-sm">
-                Request E-Prescription
-              </Link>
-              <Link to="/how-it-works" className="btn-outline-cream px-7 py-3.5 text-sm tracking-widest uppercase rounded-sm">
-                How it Works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TRUST BAR */}
-      <section className="border-y border-border bg-secondary/60">
-        <div className="mx-auto max-w-7xl px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {[
-            { I: Stethoscope, t: "AHPRA-registered doctors" },
-            { I: ShieldCheck, t: "TGA-compliant pathway" },
-            { I: Leaf, t: "Pharmaceutical-grade product" },
-            { I: Truck, t: "Discreet AU-wide delivery" },
-          ].map(({ I, t }) => (
-            <div key={t} className="flex flex-col items-center gap-2">
-              <I className="h-6 w-6 text-gold" />
-              <span className="text-xs tracking-widest uppercase text-foreground/80">{t}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section className="mx-auto max-w-4xl px-4 py-24 text-center">
-        <div className="text-[11px] tracking-[0.4em] uppercase text-gold">Our Apothecary</div>
-        <h2 className="font-display text-4xl md:text-5xl mt-4 text-balance">
-          A Sydney clinic dedicated to the considered use of cannabinoid medicine.
-        </h2>
-        <div className="gold-rule w-24 mx-auto my-8" />
-        <p className="text-muted-foreground leading-relaxed text-lg">
-          Cannabinoid Clinical is a Barangaroo-based practice connecting Australians with experienced
-          prescribers and curated, lab-verified medicines. We pair each patient with a clinician, refine
-          dosing carefully, and dispense from our own pharmacy partner &mdash; nothing more, nothing less.
-        </p>
-      </section>
-
-      {/* CATEGORIES */}
-      <section className="mx-auto max-w-7xl px-4 pb-24">
-        <div className="flex items-end justify-between mb-10">
+      <section className="border-b border-neutral-200">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-12 md:grid-cols-2 md:gap-16 md:py-20">
           <div>
-            <div className="text-[11px] tracking-[0.4em] uppercase text-gold">The Collection</div>
-            <h2 className="font-display text-4xl mt-2">Browse by formulary</h2>
+            <p className="text-sm font-semibold text-black">Wheelchairs · Australia</p>
+            <h1 className="mt-3 max-w-xl text-4xl font-semibold tracking-tight text-black md:text-5xl">
+              Wheelchairs for everyday comfort.
+            </h1>
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-neutral-800">
+              Comfort Mobility supplies wheelchairs and mobility equipment across Australia. Every
+              price is in Australian dollars, and the warranty is written on the product.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/shop"
+                search={{ category: "electric-wheelchairs" }}
+                className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-black hover:bg-[#e07812]"
+              >
+                Shop wheelchairs
+              </Link>
+              <Link
+                to="/about"
+                className="inline-flex items-center justify-center rounded-md border border-black bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-black hover:text-white"
+              >
+                About us
+              </Link>
+            </div>
           </div>
-          <Link to="/shop" className="hidden md:inline text-sm tracking-widest uppercase text-primary border-b border-gold pb-1">View Full Shop</Link>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((c) => (
-            <Link key={c.slug} to="/shop" className="group block">
-              <div className="aspect-[4/5] overflow-hidden rounded-sm bg-muted">
-                <img src={c.image} alt={c.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <h3 className="font-display text-2xl mt-4">{c.name}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{c.blurb}</p>
-              <span className="inline-block mt-3 text-xs tracking-widest uppercase text-gold">Explore →</span>
+          <div>
+            <Link
+              to="/product/$slug"
+              params={{ slug: heroProduct.slug }}
+              className="block bg-[#f6f6f6]"
+            >
+              <img
+                src={heroProduct.image}
+                alt={heroProduct.name}
+                width={heroProduct.width}
+                height={heroProduct.height}
+                fetchPriority="high"
+                className="h-auto w-full object-contain"
+              />
             </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* FEATURED PRODUCTS */}
-      <section className="bg-secondary/40 border-y border-border py-24">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="text-center mb-12">
-            <div className="text-[11px] tracking-[0.4em] uppercase text-gold">Most Prescribed</div>
-            <h2 className="font-display text-4xl mt-2">Patient favourites</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {products.slice(0, 4).map((p) => <ProductCard key={p.id} p={p} />)}
+            <div className="mt-4 flex items-start justify-between gap-4">
+              <div>
+                <p className="font-semibold leading-snug">{heroProduct.name}</p>
+                <p className="mt-1 text-sm text-neutral-700">{heroWarranty.label}</p>
+              </div>
+              <p className="shrink-0 text-lg font-semibold">
+                {formatAud(heroProduct.price)} <span className="text-xs font-medium">AUD</span>
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="mx-auto max-w-6xl px-4 py-24">
-        <div className="text-center mb-14">
-          <div className="text-[11px] tracking-[0.4em] uppercase text-gold">The Process</div>
-          <h2 className="font-display text-4xl mt-2">From consultation to delivery</h2>
+      <section className="border-b border-neutral-200 bg-[#f6f6f6]">
+        <div className="mx-auto grid max-w-6xl gap-6 px-5 py-8 sm:grid-cols-3">
+          <p className="text-sm">
+            <span className="block text-base font-semibold text-black">
+              {products.length} products
+            </span>
+            Listed with AUD prices, including GST.
+          </p>
+          <p className="text-sm">
+            <span className="block text-base font-semibold text-black">Warranty on every item</span>
+            3-year, 12-month, or 6-month, stated on the product.
+          </p>
+          <p className="text-sm">
+            <span className="block text-base font-semibold text-black">
+              WhatsApp {WHATSAPP_NUMBER}
+            </span>
+            Ask about fit, delivery, or a chair in the shop.
+          </p>
         </div>
-        <ol className="grid md:grid-cols-4 gap-10">
-          {[
-            ["01", "Eligibility", "Complete our 3-minute clinical questionnaire."],
-            ["02", "Consult", "Telehealth appointment with an AHPRA prescriber."],
-            ["03", "Prescription", "Receive an SAS-B or Authorised Prescriber script."],
-            ["04", "Delivery", "Dispensed discreetly to your door within 48 hours."],
-          ].map(([n, t, d]) => (
-            <li key={n} className="text-center">
-              <div className="font-display text-5xl text-gold">{n}</div>
-              <div className="gold-rule w-12 mx-auto my-4" />
-              <h3 className="font-display text-2xl">{t}</h3>
-              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{d}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="text-center mt-12">
-          <Link to="/e-prescription" className="btn-gold px-8 py-3.5 text-sm tracking-widest uppercase rounded-sm inline-block">
-            Begin Your Assessment
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-3xl font-semibold">Wheelchairs</h2>
+            <p className="mt-2 max-w-xl text-neutral-700">
+              New and pre-owned powerchairs, manual chairs, and children&rsquo;s wheelchairs.
+            </p>
+          </div>
+          <Link
+            to="/shop"
+            className="hidden text-sm font-semibold underline decoration-[#f88820] decoration-2 underline-offset-4 sm:inline"
+          >
+            Full catalogue
           </Link>
         </div>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {homeCategories.map((category) => {
+            const sample = categoryImage(category.slug);
+            if (!sample) return null;
+            return (
+              <Link
+                key={category.slug}
+                to="/shop"
+                search={{ category: category.slug }}
+                className="group border border-neutral-200"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#f6f6f6]">
+                  <img
+                    src={sample.image}
+                    alt=""
+                    width={sample.width}
+                    height={sample.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-contain"
+                  />
+                </div>
+                <div className="flex items-baseline justify-between gap-3 px-4 py-4">
+                  <h3 className="font-semibold group-hover:underline">{category.name}</h3>
+                  <span className="text-sm text-neutral-600">{categoryCount(category.slug)}</span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </section>
 
-      {/* TESTIMONIAL */}
-      <section className="bg-primary text-primary-foreground py-24">
-        <div className="mx-auto max-w-3xl px-4 text-center">
-          <div className="text-gold text-2xl mb-6">&ldquo; &rdquo;</div>
-          <blockquote className="font-display text-2xl md:text-3xl leading-snug italic">
-            After years of trial and error with chronic pain, the team at Cannabinoid Clinical
-            finally helped me find a regimen that lets me sleep. The care has been genuinely clinical.
-          </blockquote>
-          <div className="mt-8 text-xs tracking-[0.3em] uppercase opacity-80">— Verified Patient, NSW</div>
+      <section className="border-y border-neutral-200 bg-white">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+          <h2 className="text-3xl font-semibold">Featured chairs</h2>
+          <div className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredWheelchairs.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-black text-white">
+        <div className="mx-auto max-w-6xl px-5 py-14 md:flex md:items-center md:justify-between md:gap-12">
+          <div className="max-w-3xl">
+            <h2 className="text-2xl font-semibold text-white">Warranty</h2>
+            <p className="mt-3 text-base leading-relaxed text-white/90">{WARRANTY_SUMMARY}</p>
+          </div>
+          <a
+            href={WHATSAPP_HREF}
+            className="mt-6 inline-flex shrink-0 items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-semibold text-black hover:bg-[#e07812] md:mt-0"
+          >
+            Message us
+          </a>
         </div>
       </section>
     </>
