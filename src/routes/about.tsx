@@ -1,48 +1,98 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { products, WARRANTY_SUMMARY } from "@/data/products";
+import { WHATSAPP_HREF, WHATSAPP_NUMBER } from "@/lib/site";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Cannabinoid Clinical" },
-      { name: "description", content: "Cannabinoid Clinical is a Sydney-based apothecary devoted to the considered use of plant medicine in Australian healthcare." },
+      { title: "About — Comfort Mobility" },
+      {
+        name: "description",
+        content:
+          "Comfort Mobility is an Australian wheelchair shop. Read how we sell, deliver, and warrant mobility equipment.",
+      },
     ],
   }),
   component: About,
 });
 
+const faqs = [
+  {
+    q: "Where does Comfort Mobility sell?",
+    a: "We are based in Australia and supply customers across the country. Prices on this site are in Australian dollars and include GST.",
+  },
+  {
+    q: "What warranty comes with a product?",
+    a: `${WARRANTY_SUMMARY}. The warranty for the item you are looking at is also shown on its product page.`,
+  },
+  {
+    q: "Do you sell electric and manual wheelchairs?",
+    a: "Yes. The shop includes new and used electric wheelchairs, manual wheelchairs, children's wheelchairs, and other mobility equipment.",
+  },
+  {
+    q: "How do I ask about a chair?",
+    a: `Message us on WhatsApp at ${WHATSAPP_NUMBER}. The WhatsApp button stays on the screen while you browse, including on your phone.`,
+  },
+  {
+    q: "How does an order work?",
+    a: "Add the products you want to the cart, then send the list on WhatsApp. We confirm availability, warranty, and delivery before anything leaves us.",
+  },
+  {
+    q: "Can I return something?",
+    a: "Contact us within 14 days of delivery if an unused item is not right. Faulty goods are handled under the Australian Consumer Law, alongside the warranty stated on the product.",
+  },
+];
+
 function About() {
   return (
-    <article className="mx-auto max-w-3xl px-4 py-20">
-      <header className="text-center">
-        <div className="text-[11px] tracking-[0.4em] uppercase text-gold">Our Story</div>
-        <h1 className="font-display text-5xl mt-3">About Cannabinoid Clinical</h1>
-        <div className="gold-rule w-24 mx-auto mt-6" />
-      </header>
-      <div className="mt-12 space-y-6 text-lg leading-relaxed text-foreground/85">
+    <article className="mx-auto max-w-3xl px-5 py-12 md:py-16">
+      <p className="text-sm font-semibold">Comfort Mobility</p>
+      <h1 className="mt-3 text-4xl font-semibold">About us</h1>
+      <div className="mt-8 space-y-5 text-lg leading-relaxed text-neutral-800">
         <p>
-          Cannabinoid Clinical was founded in Sydney in 2024 by a small team of AHPRA-registered
-          clinicians and pharmacists who saw a need for a more considered, more honest approach to
-          plant medicine in Australian healthcare.
+          Comfort Mobility is an Australian shop for wheelchairs and mobility equipment. The
+          catalogue covers electric wheelchairs, manual wheelchairs, children&rsquo;s chairs, and
+          related gear, with {products.length} products priced in Australian dollars.
         </p>
         <p>
-          We are not a dispensary chasing volume. We are an apothecary &mdash; one that takes the time
-          to understand a patient&rsquo;s symptoms, history, and goals before recommending a regimen.
-          Every product on our shelf has been chosen on clinical merit and verified by an independent lab.
+          We keep the buying path straightforward. Each product shows its name, its price in AUD,
+          and the warranty that applies. If you want help comparing chairs, message us on WhatsApp
+          and we will talk it through.
         </p>
         <p>
-          Our consultations operate under the Therapeutic Goods Administration&rsquo;s Special Access
-          Scheme (Category B) and Authorised Prescriber pathways, with dispensing handled by our
-          pharmacy partner in New South Wales. Every prescription is the product of a real conversation
-          with a real doctor.
-        </p>
-        <p className="font-display text-2xl italic text-primary border-l-2 border-gold pl-6 my-10">
-          Medicine should feel like medicine &mdash; quiet, exact, and human.
-        </p>
-        <p>
-          If you are a patient, a referrer, or simply curious, we welcome you to reach out. Our door
-          in Barangaroo is open.
+          Delivery is arranged within Australia. We confirm stock before dispatch so the chair that
+          arrives is the one you asked for.
         </p>
       </div>
+
+      <section id="faq" className="mt-16 scroll-mt-28">
+        <h2 className="text-3xl font-semibold">Frequently asked questions</h2>
+        <Accordion type="single" collapsible className="mt-6 border-t border-neutral-200">
+          {faqs.map((item, index) => (
+            <AccordionItem key={item.q} value={`faq-${index}`}>
+              <AccordionTrigger className="py-4 text-base font-semibold hover:no-underline">
+                {item.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-base leading-relaxed text-neutral-800">
+                {item.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+        <p className="mt-8 text-sm text-neutral-700">
+          Still deciding?{" "}
+          <a href={WHATSAPP_HREF} className="font-semibold underline">
+            Message {WHATSAPP_NUMBER} on WhatsApp
+          </a>
+          .
+        </p>
+      </section>
     </article>
   );
 }

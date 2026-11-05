@@ -1,48 +1,99 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { WHATSAPP_HREF, WHATSAPP_NUMBER } from "@/lib/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Cannabinoid Clinical" },
-      { name: "description", content: "Reach the Cannabinoid Clinical patient care team in Barangaroo, Sydney." },
+      { title: "Contact — Comfort Mobility" },
+      {
+        name: "description",
+        content: `Contact Comfort Mobility on WhatsApp ${WHATSAPP_NUMBER} about wheelchairs and mobility equipment in Australia.`,
+      },
     ],
   }),
   component: Contact,
 });
 
 function Contact() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  function onSubmit(event: FormEvent) {
+    event.preventDefault();
+    const text = [`Hello Comfort Mobility, my name is ${name || "a customer"}.`, message]
+      .filter(Boolean)
+      .join("\n\n");
+    window.open(
+      `${WHATSAPP_HREF}?text=${encodeURIComponent(text)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  }
+
   return (
-    <div className="mx-auto max-w-6xl px-4 py-20">
-      <header className="text-center mb-14">
-        <div className="text-[11px] tracking-[0.4em] uppercase text-gold">Patient Care</div>
-        <h1 className="font-display text-5xl mt-3">Contact Us</h1>
-        <div className="gold-rule w-24 mx-auto mt-6" />
-      </header>
-      <div className="grid md:grid-cols-2 gap-12">
-        <div className="space-y-6">
-          {[
-            { I: MapPin, t: "Clinic", d: "Level 35, Tower One, Barangaroo\n100 Barangaroo Avenue\nSydney NSW 2000" },
-            { I: Phone, t: "Telephone", d: "+61 2 8005 4112" },
-            { I: Mail, t: "Email", d: "care@cannabinoidclinical.au" },
-            { I: Clock, t: "Hours", d: "Monday – Friday · 8am – 7pm AEST\nSaturday · 9am – 1pm AEST" },
-          ].map(({ I, t, d }) => (
-            <div key={t} className="flex gap-5 border-b border-border pb-6">
-              <I className="h-6 w-6 text-gold shrink-0 mt-1" />
-              <div>
-                <div className="text-[11px] tracking-[0.28em] uppercase text-muted-foreground">{t}</div>
-                <div className="font-display text-xl mt-1 whitespace-pre-line">{d}</div>
-              </div>
+    <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
+      <div className="grid gap-12 md:grid-cols-2">
+        <div>
+          <h1 className="text-4xl font-semibold">Contact</h1>
+          <p className="mt-4 max-w-md text-lg leading-relaxed text-neutral-800">
+            Ask about a wheelchair, a warranty, or delivery anywhere in Australia. WhatsApp is the
+            fastest way to reach us.
+          </p>
+          <dl className="mt-8 space-y-6">
+            <div>
+              <dt className="text-sm font-semibold">WhatsApp</dt>
+              <dd className="mt-1">
+                <a
+                  href={WHATSAPP_HREF}
+                  className="text-lg font-semibold underline decoration-[#f88820] decoration-2 underline-offset-4"
+                >
+                  {WHATSAPP_NUMBER}
+                </a>
+              </dd>
             </div>
-          ))}
+            <div>
+              <dt className="text-sm font-semibold">Where we sell</dt>
+              <dd className="mt-1 text-neutral-800">Australia. Prices in AUD, including GST.</dd>
+            </div>
+            <div>
+              <dt className="text-sm font-semibold">Hours</dt>
+              <dd className="mt-1 text-neutral-800">
+                Monday to Friday, 9am–5pm AEST. We reply to WhatsApp messages in business hours.
+              </dd>
+            </div>
+          </dl>
         </div>
-        <form className="bg-card border border-border rounded-sm p-8 md:p-10 grid gap-5">
-          <h2 className="font-display text-2xl">Send a message</h2>
-          <input placeholder="Your name" className="input" />
-          <input placeholder="Email" type="email" className="input" />
-          <textarea placeholder="How can we help?" rows={6} className="input" />
-          <button className="btn-gold px-8 py-3.5 text-sm tracking-widest uppercase rounded-sm justify-self-start">Send</button>
-          <style>{`.input{width:100%;background:var(--color-background);border:1px solid var(--color-border);padding:.7rem .9rem;font-family:var(--font-sans);color:var(--color-foreground);border-radius:2px}.input:focus{outline:2px solid var(--color-gold);outline-offset:1px}`}</style>
+        <form onSubmit={onSubmit} className="border border-neutral-200 p-6 md:p-8">
+          <h2 className="text-xl font-semibold">Send a message</h2>
+          <p className="mt-2 text-sm text-neutral-700">
+            This opens WhatsApp with your note filled in. Nothing is stored on this website.
+          </p>
+          <label className="mt-6 block text-sm font-medium">
+            Name
+            <input
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-base font-normal outline-none focus:border-black"
+              autoComplete="name"
+            />
+          </label>
+          <label className="mt-4 block text-sm font-medium">
+            Message
+            <textarea
+              required
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              rows={6}
+              className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-base font-normal outline-none focus:border-black"
+            />
+          </label>
+          <button
+            type="submit"
+            className="mt-6 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-black hover:bg-[#e07812]"
+          >
+            Send on WhatsApp
+          </button>
         </form>
       </div>
     </div>

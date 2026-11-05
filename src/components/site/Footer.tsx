@@ -1,53 +1,103 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/comfort-mobility-logo.png";
+import { WHATSAPP_HREF, WHATSAPP_NUMBER } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground mt-24">
-      <div className="mx-auto max-w-7xl px-4 py-16 grid md:grid-cols-4 gap-10">
-        <div>
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="" className="h-10 w-10" />
-            <span className="font-display text-2xl">Cannabinoid Clinical</span>
-          </div>
-          <p className="mt-4 text-sm opacity-80 leading-relaxed">
-            A Sydney-based clinical apothecary devoted to safe, doctor-approved access to plant medicine for Australian patients.
+    <footer className="mt-20 border-t border-neutral-200 bg-white">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-4">
+        <div className="md:col-span-1">
+          <img src={logo} alt="Comfort Mobility" width={600} height={480} className="h-20 w-auto" />
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-700">
+            Wheelchairs and mobility equipment for customers across Australia. Prices in Australian
+            dollars.
           </p>
         </div>
         <div>
-          <h4 className="font-display text-xl text-gold mb-4">Apothecary</h4>
-          <ul className="space-y-2 text-sm opacity-90">
-            <li><Link to="/shop">Shop</Link></li>
-            <li><Link to="/how-it-works">How it Works</Link></li>
-            <li><Link to="/e-prescription">E-Prescription</Link></li>
-            <li><Link to="/about">Our Story</Link></li>
+          <h2 className="text-sm font-semibold">Shop</h2>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>
+              <Link
+                to="/shop"
+                search={{ category: "electric-wheelchairs" }}
+                className="hover:underline"
+              >
+                Electric wheelchairs
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/shop"
+                search={{ category: "manual-wheelchairs" }}
+                className="hover:underline"
+              >
+                Manual wheelchairs
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/shop"
+                search={{ category: "childrens-wheelchairs" }}
+                className="hover:underline"
+              >
+                Children&rsquo;s wheelchairs
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" className="hover:underline">
+                Full catalogue
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
-          <h4 className="font-display text-xl text-gold mb-4">Patient Care</h4>
-          <ul className="space-y-2 text-sm opacity-90">
-            <li><Link to="/faqs">FAQs</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/privacy">Privacy Policy</Link></li>
-            <li><Link to="/refunds">Refunds & Returns</Link></li>
+          <h2 className="text-sm font-semibold">Comfort Mobility</h2>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>
+              <Link to="/about" className="hover:underline">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" hash="faq" className="hover:underline">
+                FAQs
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:underline">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link to="/refunds" className="hover:underline">
+                Refunds
+              </Link>
+            </li>
+            <li>
+              <Link to="/privacy" className="hover:underline">
+                Privacy
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
-          <h4 className="font-display text-xl text-gold mb-4">Clinic</h4>
-          <address className="not-italic text-sm opacity-90 leading-relaxed">
-            Cannabinoid Clinical Pty Ltd<br />
-            Level 35, Tower One, Barangaroo<br />
-            100 Barangaroo Avenue<br />
-            Sydney NSW 2000, Australia<br /><br />
-            <span className="text-gold">+61 2 8005 4112</span><br />
-            care@cannabinoidclinical.au
-          </address>
+          <h2 className="text-sm font-semibold">Talk to us</h2>
+          <p className="mt-3 text-sm leading-relaxed text-neutral-700">
+            Message us on WhatsApp. We help customers choose a chair and confirm delivery within
+            Australia.
+          </p>
+          <a
+            href={WHATSAPP_HREF}
+            className="mt-3 inline-block text-sm font-semibold underline decoration-[#f88820] decoration-2 underline-offset-4"
+          >
+            {WHATSAPP_NUMBER}
+          </a>
         </div>
       </div>
-      <div className="border-t border-primary-foreground/15">
-        <div className="mx-auto max-w-7xl px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs opacity-70">
-          <p>© {new Date().getFullYear()} Cannabinoid Clinical Pty Ltd · ABN 00 000 000 000</p>
-          <p>For Australian patients with a valid medical prescription. Schedule 8 medicine.</p>
+      <div className="border-t border-neutral-200">
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 pb-24 text-xs text-neutral-600 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Comfort Mobility. Australia.</p>
+          <p>All prices in AUD and include GST.</p>
         </div>
       </div>
     </footer>
