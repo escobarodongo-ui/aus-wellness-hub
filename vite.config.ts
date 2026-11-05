@@ -7,6 +7,16 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Hosting runs `vite build` outside the Lovable sandbox. Nitro must be on,
+  // and the host serves the Vercel Build Output, not a Cloudflare worker.
+  nitro: {
+    preset: "vercel",
+    output: {
+      dir: "{{ rootDir }}/.vercel/output",
+      serverDir: "{{ output.dir }}/functions/__server.func",
+      publicDir: "{{ output.dir }}/static/{{ baseURL }}",
+    },
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
